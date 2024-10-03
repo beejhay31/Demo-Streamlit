@@ -5,8 +5,9 @@ from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report
-from evidently.dashboard import Dashboard
-from evidently.tabs import DataDriftTab
+from evidently import ColumnMapping
+from evidently.report import Report
+from evidently.metric_preset import DataDriftPreset
 from autovizwidget import AutoVizWidget
 
 # Placeholder for user authentication (SSO simulation)
@@ -33,11 +34,24 @@ def train_model(X, y):
 
 # Detect model drift
 def detect_drift(reference_data, current_data):
-    drift_dashboard = Dashboard(tabs=[DataDriftTab()])
-    drift_dashboard.calculate(reference_data, current_data)
-    drift_dashboard.save("drift_report.html")
-    with open("drift_report.html", "r") as f:
+    # Define the column mapping
+    column_mapping = ColumnMapping()
+
+    # Create a report object
+    report = Report(metrics=[
+        DataDriftPreset(),
+    ])
+
+    # Generate the report
+    report.run(reference_data, current_data, column_mapping)
+    
+    # Save the report as HTML
+    report.save('drift_report.html')
+
+    # Read and display the report
+    with open('drift_report.html', 'r') as f:
         drift_report_html = f.read()
+    
     st.components.v1.html(drift_report_html, height=600)
 
 # Streamlit app structure
