@@ -80,8 +80,8 @@ def main():
 
         # Run EDA using AutoViz
         st.subheader("Exploratory Data Analysis (EDA) with AutoViz")
-        auto_viz = av.AutoViz()
-        auto_viz.auto_viz(df, target='target', df_options={"header": 0, "index_col": None, "parse_dates": False})
+        auto_viz = av.AutoViz(df, target='target', df_options={"header": 0, "index_col": None, "parse_dates": False})
+        auto_viz.show()
 
         # Simulate loading current dataset for drift detection
         # In a real scenario, this would come from a new data source
