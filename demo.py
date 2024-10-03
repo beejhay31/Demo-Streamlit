@@ -8,7 +8,7 @@ from sklearn.metrics import accuracy_score, classification_report
 from evidently import ColumnMapping
 from evidently.report import Report
 from evidently.metric_preset import DataDriftPreset
-from autovizwidget import AutoVizWidget
+from autoviz import AutoViz
 
 # Placeholder for user authentication (SSO simulation)
 def authenticate_user():
@@ -80,7 +80,8 @@ def main():
 
         # Run EDA using AutoViz
         st.subheader("Exploratory Data Analysis (EDA) with AutoViz")
-        AutoVizWidget(df, target='target', df_options={"header": 0, "index_col": None, "parse_dates": False})
+        auto_viz = AutoViz()
+        auto_viz.auto_viz(df, target='target', df_options={"header": 0, "index_col": None, "parse_dates": False})
 
         # Simulate loading current dataset for drift detection
         # In a real scenario, this would come from a new data source
