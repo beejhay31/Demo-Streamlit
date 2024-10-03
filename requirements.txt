@@ -3,6 +3,6 @@ scikit-learn
 pandas
 matplotlib
 evidently
-autovizwidget
+autoviz
 numpy
 pyyaml
