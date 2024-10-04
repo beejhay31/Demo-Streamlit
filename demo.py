@@ -8,7 +8,7 @@ from sklearn.metrics import accuracy_score, classification_report
 from evidently import ColumnMapping
 from evidently.report import Report
 from evidently.metric_preset import DataDriftPreset
-import sweetviz as sv
+from dataprep.eda import create_report
 
 
 # Placeholder for user authentication (SSO simulation)
@@ -83,8 +83,10 @@ def main():
 
         # Run EDA using AutoViz
         st.subheader("Exploratory Data Analysis (EDA) with SweetViz")
-        analyze_report = sv.analyze(df)
-        analyze_report.show_html('report.html', open_browser=True)
+        #df = pd.read_csv("parking_violations.csv")
+        create_report(df)
+        #analyze_report = sv.analyze(df)
+        #analyze_report.show_html('report.html', open_browser=True)
         #auto_viz = AutoViz_Class()
         #auto = auto_viz.AutoViz(df, depVar='target')
         #auto.show()
