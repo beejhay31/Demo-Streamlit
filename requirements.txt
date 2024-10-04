@@ -3,7 +3,7 @@ scikit-learn
 pandas
 matplotlib
 evidently
-sweetviz
+sweetviz==2.1.0 
 numpy
 pyyaml
 Ipython
