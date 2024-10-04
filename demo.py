@@ -80,9 +80,9 @@ def main():
         st.text(classification_report(y_test, predictions, target_names=target_names))
 
         # Run EDA using AutoViz
-        st.subheader("Exploratory Data Analysis (EDA) with AutoViz")
+        st.subheader("Exploratory Data Analysis (EDA) with SweetViz")
         analyze_report = sv.analyze(df, target_feat='target')
-        analyze_report.show_html(report.html', open_browser=False)
+        analyze_report.show_html('report.html', open_browser=False)
         #auto_viz = AutoViz_Class()
         #auto = auto_viz.AutoViz(df, depVar='target')
         #auto.show()
