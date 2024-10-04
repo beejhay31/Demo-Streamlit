@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -9,7 +10,6 @@ from evidently import ColumnMapping
 from evidently.report import Report
 from evidently.metric_preset import DataDriftPreset
 from dataprep.eda import create_report
-
 
 # Placeholder for user authentication (SSO simulation)
 def authenticate_user():
@@ -55,6 +55,40 @@ def detect_drift(reference_data, current_data):
     
     st.components.v1.html(drift_report_html, height=600)
 
+# Exploratory Data Analysis (EDA)
+def perform_eda(df):
+    st.subheader("Exploratory Data Analysis (EDA)")
+
+    # EDA 1: Basic statistics
+    st.write("**Basic Statistics**")
+    st.write(df.describe())
+
+    # EDA 2: Class distribution
+    st.write("**Class Distribution**")
+    class_dist = pd.DataFrame(df['species'].value_counts()).reset_index()
+    class_dist.columns = ['Species', 'Count']
+    st.bar_chart(class_dist.set_index('Species'))
+
+    # EDA 3: Pairplot
+    st.write("**Pairplot of Features**")
+    sns.pairplot(df, hue='species')
+    st.pyplot()
+
+    # EDA 4: Correlation Heatmap
+    st.write("**Correlation Heatmap**")
+    correlation_matrix = df.corr()
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
+    st.pyplot()
+
+    # EDA 5: Boxplot for each feature
+    st.write("**Boxplots for Each Feature**")
+    fig, ax = plt.subplots(2, 2, figsize=(12, 8))
+    sns.boxplot(data=df, x='species', y='sepal length (cm)', ax=ax[0, 0])
+    sns.boxplot(data=df, x='species', y='sepal width (cm)', ax=ax[0, 1])
+    sns.boxplot(data=df, x='species', y='petal length (cm)', ax=ax[1, 0])
+    sns.boxplot(data=df, x='species', y='petal width (cm)', ax=ax[1, 1])
+    st.pyplot(fig)
+
 # Streamlit app structure
 def main():
     st.title("Iris Classification App")
@@ -66,10 +100,14 @@ def main():
         # Load dataset
         df, y, target_names = load_iris_data()
 
-        print(target_names)
+        # Add species name to the dataframe for EDA purposes
+        df['species'] = y.map({i: target_names[i] for i in range(len(target_names))})
+
+        # Perform EDA
+        perform_eda(df)
 
         # Split data
-        X_train, X_test, y_train, y_test = train_test_split(df, y, test_size=0.2, random_state=42)
+        X_train, X_test, y_train, y_test = train_test_split(df.drop(columns=['species']), y, test_size=0.2, random_state=42)
 
         # Train model
         model = train_model(X_train, y_train)
@@ -81,20 +119,9 @@ def main():
         st.write("Classification Report:")
         st.text(classification_report(y_test, predictions, target_names=target_names))
 
-        # Run EDA using AutoViz
-        st.subheader("Exploratory Data Analysis (EDA) with SweetViz")
-        #df = pd.read_csv("parking_violations.csv")
-        create_report(df)
-        #analyze_report = sv.analyze(df)
-        #analyze_report.show_html('report.html', open_browser=True)
-        #auto_viz = AutoViz_Class()
-        #auto = auto_viz.AutoViz(df, depVar='target')
-        #auto.show()
-
         # Simulate loading current dataset for drift detection
-        # In a real scenario, this would come from a new data source
-        current_data = df.copy()  # Here, we just reuse the original data for demonstration
-        detect_drift(df, current_data)
+        current_data = df.drop(columns=['species']).copy()  # Here, we just reuse the original data for demonstration
+        detect_drift(df.drop(columns=['species']), current_data)
 
 if __name__ == "__main__":
     main()
