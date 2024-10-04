@@ -7,4 +7,3 @@ sweetviz
 numpy
 pyyaml
 Ipython
-pkg_resources
