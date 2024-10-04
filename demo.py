@@ -9,7 +9,6 @@ from sklearn.metrics import accuracy_score, classification_report
 from evidently import ColumnMapping
 from evidently.report import Report
 from evidently.metric_preset import DataDriftPreset
-from dataprep.eda import create_report
 
 # Placeholder for user authentication (SSO simulation)
 def authenticate_user():
