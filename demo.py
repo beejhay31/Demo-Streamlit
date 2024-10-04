@@ -38,20 +38,20 @@ def detect_drift(reference_data, current_data):
     column_mapping = ColumnMapping()
 
     # Create a report object
-    report = Report(metrics=[
-        DataDriftPreset(),
-    ])
+    report = Report(metrics=[DataDriftPreset()])
 
     # Generate the report
     report.run(current_data=current_data, reference_data=reference_data, column_mapping=column_mapping)
-    
-    # Save the report as HTML
-    report.save('drift_report.html')
 
-    # Read and display the report
-    with open('drift_report.html', 'r') as f:
-        drift_report_html = f.read()
-    
+    # Save and display the report using in-memory tempfile
+    with tempfile.NamedTemporaryFile(suffix=".html", delete=False) as tmp_file:
+        report.save(tmp_file.name)
+
+        # Read the HTML content
+        with open(tmp_file.name, 'r') as f:
+            drift_report_html = f.read()
+
+    # Display the report in Streamlit
     st.components.v1.html(drift_report_html, height=600)
 
 # Exploratory Data Analysis (EDA)
@@ -69,9 +69,11 @@ def perform_eda(df):
     st.bar_chart(class_dist.set_index('Species'))
 
     # EDA 3: Pairplot
-    st.write("**Pairplot of Features**")
-    sns.pairplot(df, hue='species')
-    st.pyplot()
+    # Create the pairplot
+    pairplot_fig = sns.pairplot(df, hue='species')
+    
+    # Render the plot using st.pyplot
+    st.pyplot(pairplot_fig)
 
     # EDA 4: Correlation Heatmap
     st.write("**Correlation Heatmap**")
