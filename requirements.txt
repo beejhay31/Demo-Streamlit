@@ -3,7 +3,7 @@ scikit-learn
 pandas
 matplotlib
 evidently
-autoviz
+sweetviz
 numpy
 pyyaml
 Ipython
