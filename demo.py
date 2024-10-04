@@ -33,27 +33,22 @@ def train_model(X, y):
     return model
 
 # Detect model drift
-def detect_drift(reference_data, current_data):
+def detect_drift(reference_data, current_data, y_test, predictions):
     # Define the column mapping
     column_mapping = ColumnMapping()
+    column_mapping.target = y_test
+    column_mapping.prediction = predictions
+    column_mapping.numerical_features = reference_data.columns.tolist()
 
     # Create a report object
     report = Report(metrics=[DataDriftPreset()])
 
     # Generate the report
     report.run(current_data=current_data, reference_data=reference_data, column_mapping=column_mapping)
-    report.show()
-    # Save and display the report using in-memory tempfile
-    """with tempfile.NamedTemporaryFile(suffix=".html", delete=False) as tmp_file:
-        report.save(tmp_file.name)
-        tmp_file_path = tmp_file.name"""
-        
-        # Read the HTML content
-        #with open(tmp_file.name, 'r') as f:
-            #drift_report_html = f.read()
 
-    # Display the report using an iframe
-    #st.components.v1.iframe(src=tmp_file_path, height=600, width=1000)
+    # Display the report using Streamlit
+    st.subheader("Data Drift Report")
+    report.show()
 
 # Exploratory Data Analysis (EDA)
 def perform_eda(df):
