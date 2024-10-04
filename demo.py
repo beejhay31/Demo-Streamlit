@@ -77,9 +77,17 @@ def perform_eda(df):
     st.write("**Correlation Heatmap**")
     # Exclude the non-numeric 'species' column for correlation matrix calculation
     numeric_df = df.drop(columns=['species'])
+    
+    # Create a new figure for the heatmap
+    fig, ax = plt.subplots(figsize=(10, 6))
     correlation_matrix = numeric_df.corr()
-    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
-    st.pyplot()
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', ax=ax)
+    
+    # Display the plot
+    st.pyplot(fig)
+    
+    # Clear the figure to prevent overlap
+    plt.clf()
 
     # EDA 5: Boxplot for each feature
     st.write("**Boxplots for Each Feature**")
