@@ -42,18 +42,18 @@ def detect_drift(reference_data, current_data):
 
     # Generate the report
     report.run(current_data=current_data, reference_data=reference_data, column_mapping=column_mapping)
-
+    report.show()
     # Save and display the report using in-memory tempfile
-    with tempfile.NamedTemporaryFile(suffix=".html", delete=False) as tmp_file:
+    """with tempfile.NamedTemporaryFile(suffix=".html", delete=False) as tmp_file:
         report.save(tmp_file.name)
-        tmp_file_path = tmp_file.name
+        tmp_file_path = tmp_file.name"""
         
         # Read the HTML content
         #with open(tmp_file.name, 'r') as f:
             #drift_report_html = f.read()
 
     # Display the report using an iframe
-    st.components.v1.iframe(src=tmp_file_path, height=600, width=1000)
+    #st.components.v1.iframe(src=tmp_file_path, height=600, width=1000)
 
 # Exploratory Data Analysis (EDA)
 def perform_eda(df):
