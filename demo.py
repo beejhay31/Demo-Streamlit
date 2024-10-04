@@ -44,7 +44,7 @@ def detect_drift(reference_data, current_data):
     ])
 
     # Generate the report
-    report.run(reference_data, current_data, column_mapping)
+    report.run(current_data=current_data, reference_data=reference_data, column_mapping=column_mapping)
     
     # Save the report as HTML
     report.save('drift_report.html')
@@ -66,6 +66,8 @@ def main():
         # Load dataset
         df, y, target_names = load_iris_data()
 
+        print(target_names)
+
         # Split data
         X_train, X_test, y_train, y_test = train_test_split(df, y, test_size=0.2, random_state=42)
 
@@ -81,8 +83,8 @@ def main():
 
         # Run EDA using AutoViz
         st.subheader("Exploratory Data Analysis (EDA) with SweetViz")
-        analyze_report = sv.analyze(df, target_feat='target')
-        analyze_report.show_html('report.html', open_browser=False)
+        analyze_report = sv.analyze(df)
+        analyze_report.show_html('report.html', open_browser=True)
         #auto_viz = AutoViz_Class()
         #auto = auto_viz.AutoViz(df, depVar='target')
         #auto.show()
