@@ -75,7 +75,9 @@ def perform_eda(df):
 
     # EDA 4: Correlation Heatmap
     st.write("**Correlation Heatmap**")
-    correlation_matrix = df.corr()
+    # Exclude the non-numeric 'species' column for correlation matrix calculation
+    numeric_df = df.drop(columns=['species'])
+    correlation_matrix = numeric_df.corr()
     sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
     st.pyplot()
 
