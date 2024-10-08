@@ -5,3 +5,4 @@ matplotlib
 evidently
 numpy
 pyyaml
+seaborn
