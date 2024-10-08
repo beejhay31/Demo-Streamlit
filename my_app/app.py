@@ -77,5 +77,6 @@ def main_app():
 if __name__ == '__main__':
     if not st.session_state['logged_in']:
         login()
+        main_app()
     else:
         main_app()
