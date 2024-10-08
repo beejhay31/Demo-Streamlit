@@ -25,7 +25,7 @@ def login():
     # Validate email domain
     if email:
         if not email.endswith("@datadock.ai"):
-            st.error("Invalid email domain")
+            st.error("Invalid email domain. Only @datadock.ai email addresses are allowed.")
         else:
             st.session_state['email'] = email
             st.success(f"Welcome, {email}. Please enter your 7-digit login code.")
@@ -38,6 +38,7 @@ def login():
             st.session_state['login_code'] = entered_code
             st.session_state['logged_in'] = True
             st.success("You are now logged in.")
+            st.experimental_rerun()  # Forces the app to reload and direct to the main interface
         else:
             st.error("Invalid login code. Please try again.")
 
@@ -76,7 +77,6 @@ def main_app():
 # Main Streamlit app logic
 if __name__ == '__main__':
     if not st.session_state['logged_in']:
-        login()
-        main_app()
+        login()  # If not logged in, show the login screen
     else:
-        main_app()
+        main_app()  # If logged in, show the main app interface
