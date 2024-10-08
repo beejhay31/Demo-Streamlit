@@ -28,8 +28,7 @@ def main():
     view = View()
 
     # Add species name to the dataframe for EDA purposes
-    df['species'] = y.map({i: target_names[i] for i in range(len(target_names))})
-
+    df['species'] = pd.Series(y).map({i: target_names[i] for i in range(len(target_names))})
     # Perform Exploratory Data Analysis (EDA)
     view.display_monitoring(df, df)  # Display the same data for monitoring purposes (you may change this)
 
