@@ -6,11 +6,11 @@ class View:
         """Display a report in the Streamlit app."""
         st.subheader(report_name)
         
-        if isinstance(report, dict):
-            st.write(report)
+        # Check if the report is an instance of Evidently's Report class
+        if hasattr(report, 'show'):
+            report.show()  # Use the show method to display the report
         else:
-            # If the report is an Evidently Report object, use the show method
-            report.show()
+            st.write(report) 
             
     @staticmethod
     def display_monitoring(reference_data, current_data):
