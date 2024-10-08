@@ -46,7 +46,7 @@ def main():
     st.subheader("Monitoring Options")
     if st.button("Generate Reports"):
         performance_report = model.performance_report(reference_data, current_data)
-        view.display_report(performance_report, "Model Performance Report")
+        view.display_performance_report(performance_report, "Model Performance Report")
 
         target_report = model.target_report(reference_data, current_data)
         view.display_report(target_report, "Target Drift Report")
