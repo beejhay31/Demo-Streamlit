@@ -1,3 +1,5 @@
+import streamlit as st
+
 class Model:
     def train_model(self, reference_data, current_data):
         st.write("Training model on selected data...")
