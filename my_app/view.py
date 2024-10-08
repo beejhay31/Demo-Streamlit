@@ -2,16 +2,7 @@ import streamlit as st
 
 class View:
     @staticmethod
-    def display_report(report, report_name):
-        
-        """Display a report in the Streamlit app."""
-        """st.subheader(report_name)
-        
-        # Check if the report is an instance of Evidently's Report class
-        if hasattr(report, 'show'):
-            report.show()  # Use the show method to display the report
-        else:
-            st.write(report)""" 
+    def display_report(report, report_name): 
         st.write(f"{report_name}")
         st.components.v1.html(report.get_html(), height=1000, scrolling=True)
             
