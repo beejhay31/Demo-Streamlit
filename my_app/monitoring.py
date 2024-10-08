@@ -44,7 +44,7 @@ class Monitoring:
             if generate_model_report:
                 st.write("### Model Performance Report")
                 performance_report = self.model.performance_report(reference_data, current_data)
-                self.view.display_report(performance_report, "Model Performance Report")
+                self.view.display_performance_report(performance_report, "Model Performance Report")
 
             if generate_target_drift:
                 st.write("### Target Drift Report")
