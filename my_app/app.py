@@ -3,12 +3,9 @@ from classification import load_iris_data, perform_eda, train_model, model_perfo
 from monitoring import Monitoring
 from model import Model
 from sklearn.model_selection import train_test_split
-import random
-import smtplib  # For sending email
 
-# Function to send the login code via email
-def send_login_code(email, code):
-    print(f"Login code for {email}: {code}")  # Replace with actual email sending logic using smtplib or an API like SendGrid
+# Predefined valid 7-digit login codes
+VALID_CODES = ["1234567", "2345678", "3456789", "4567890", "5678901", "6789012", "7890123"]
 
 # Initialize session state for login management
 if 'login_code' not in st.session_state:
@@ -18,30 +15,31 @@ if 'email' not in st.session_state:
 if 'logged_in' not in st.session_state:
     st.session_state['logged_in'] = False
 
-# Login flow
+# Login flow using predefined unique 7-digit codes and valid email
 def login():
     st.title("Login")
 
+    # Email input: only allow emails with @datadock.ai domain
     email = st.text_input("Enter your email")
-    if email and email.endswith("@datadock.ai"):
-        if st.button("Send Login Code"):
-            code = random.randint(100000, 999999)
-            st.session_state['login_code'] = code
+    
+    # Validate email domain
+    if email:
+        if not email.endswith("@datadock.ai"):
+            st.error("Invalid email domain. Only @datadock.ai email addresses are allowed.")
+        else:
             st.session_state['email'] = email
-            send_login_code(email, code)
-            st.success("A login code has been sent to your email.")
+            st.success(f"Welcome, {email}. Please enter your 7-digit login code.")
+    
+    # Code input and verification
+    entered_code = st.text_input("Enter the 7-digit login code", type='password')
 
-    elif email and not email.endswith("@datadock.ai"):
-        st.error("Please use a @datadock.ai email.")
-
-    if st.session_state['login_code'] is not None:
-        entered_code = st.text_input("Enter the code sent to your email", type='password')
-        if st.button("Verify Code"):
-            if int(entered_code) == st.session_state['login_code']:
-                st.session_state['logged_in'] = True
-                st.success("You are now logged in.")
-            else:
-                st.error("Invalid code. Please try again.")
+    if st.button("Verify Code"):
+        if entered_code in VALID_CODES:
+            st.session_state['login_code'] = entered_code
+            st.session_state['logged_in'] = True
+            st.success("You are now logged in.")
+        else:
+            st.error("Invalid login code. Please try again.")
 
 # Main app interface after login
 def main_app():
