@@ -38,8 +38,7 @@ def login():
         if entered_code in VALID_CODES:
             st.session_state['login_code'] = entered_code
             st.session_state['logged_in'] = True
-            st.success("You are now logged in.")
-            st.experimental_rerun()  # Forces the app to reload and direct to the main interface
+            st.success("You are now logged in. Redirecting to the app...")
         else:
             st.error("Invalid login code. Please try again.")
 
