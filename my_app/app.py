@@ -25,7 +25,7 @@ def login():
     # Validate email domain
     if email:
         if not email.endswith("@datadock.ai"):
-            st.error("Invalid email domain. Only @datadock.ai email addresses are allowed.")
+            st.error("Invalid email domain")
         else:
             st.session_state['email'] = email
             st.success(f"Welcome, {email}. Please enter your 7-digit login code.")
