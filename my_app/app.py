@@ -48,4 +48,4 @@ if __name__ == '__main__':
     if not st.session_state['logged_in']:
         login()  # If not logged in, show the login screen
     else:
-        main_app()  # If logged in, show the main app interface
+        st.switch_page("main_app.py")  # If logged in, show the main app interface
