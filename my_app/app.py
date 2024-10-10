@@ -39,7 +39,7 @@ def login():
             st.session_state['login_code'] = entered_code
             st.session_state['logged_in'] = True
             st.success("You are now logged in. Redirecting to the app...")
-            st.switch_page("Main App")
+            st.switch_page("main_app.py")
         else:
             st.error("Invalid login code. Please try again.")
 
@@ -48,4 +48,4 @@ if __name__ == '__main__':
     if not st.session_state['logged_in']:
         login()  # If not logged in, show the login screen
     else:
-        st.switch_page("Main App")  # If logged in, show the main app interface
+        st.switch_page("main_app.py")  # If logged in, show the main app interface
