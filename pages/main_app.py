@@ -36,3 +36,6 @@ def main_app():
     elif option == 'Monitoring':
         st.write("Monitoring Interface")
         monitoring.run_monitoring()
+
+if __name__ == "__main__":
+    main()
