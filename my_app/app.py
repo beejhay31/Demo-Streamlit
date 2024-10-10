@@ -4,7 +4,6 @@ from monitoring import Monitoring
 from model import Model
 from view import View
 from sklearn.model_selection import train_test_split
-from main_app import main
 
 # Predefined valid 7-digit login codes
 VALID_CODES = ["1234567", "2345678", "3456789", "4567890", "5678901", "6789012", "7890123"]
