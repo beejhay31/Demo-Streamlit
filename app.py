@@ -1,8 +1,8 @@
 import streamlit as st
-from classification import load_iris_data, perform_eda, train_model, model_performance
-from monitoring import Monitoring
-from model import Model
-from view import View
+from my_app/classification import load_iris_data, perform_eda, train_model, model_performance
+from my_app/monitoring import Monitoring
+from my_app/model import Model
+from my_app/view import View
 from sklearn.model_selection import train_test_split
 
 # Predefined valid 7-digit login codes
