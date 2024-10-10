@@ -17,7 +17,6 @@ if 'logged_in' not in st.session_state:
     st.session_state['logged_in'] = False
 
 # Login flow using predefined unique 7-digit codes and valid email
-@st.cache_resource
 def login():
     st.title("Login")
 
