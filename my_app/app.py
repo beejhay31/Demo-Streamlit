@@ -4,6 +4,7 @@ from monitoring import Monitoring
 from model import Model
 from view import View
 from sklearn.model_selection import train_test_split
+from main_app import main
 
 # Predefined valid 7-digit login codes
 VALID_CODES = ["1234567", "2345678", "3456789", "4567890", "5678901", "6789012", "7890123"]
@@ -39,7 +40,7 @@ def login():
             st.session_state['login_code'] = entered_code
             st.session_state['logged_in'] = True
             st.success("You are now logged in. Redirecting to the app...")
-            st.switch_page("./pages/main_app.py")
+            st.switch_page(main())
         else:
             st.error("Invalid login code. Please try again.")
 
@@ -48,4 +49,4 @@ if __name__ == '__main__':
     if not st.session_state['logged_in']:
         login()  # If not logged in, show the login screen
     else:
-        st.switch_page("./pages/main_app.py")  # If logged in, show the main app interface
+        st.switch_page(main())  # If logged in, show the main app interface
