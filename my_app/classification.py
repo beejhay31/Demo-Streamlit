@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 import seaborn as sns
 import matplotlib.pyplot as plt
-from my_app.model import Model
+#from my_app.model import Model
 
 # Load Iris dataset
 @st.cache_resource
@@ -21,13 +21,13 @@ def load_iris_data():
 # Train model
 @st.cache_resource
 def train_model(X, y):
-    #model = LogisticRegression(max_iter=200)
-    #model.fit(X, y)
-    #return model
-    model = Model()
+    model = LogisticRegression(max_iter=200)
+    model.fit(X, y)
+    return model
+    """model = Model()
     reference_data = pd.concat([X, y.rename('target')], axis=1)
     model.train_model(reference_data, None)
-    return model
+    return model"""
 
 # EDA and classification reporting
 def perform_eda(df):
