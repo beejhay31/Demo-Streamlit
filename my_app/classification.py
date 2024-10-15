@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 import seaborn as sns
 import matplotlib.pyplot as plt
-from model.py import Model
+from my_app.model import Model
 
 # Load Iris dataset
 @st.cache_resource
@@ -61,8 +61,12 @@ def perform_eda(df):
 
 # Model performance reporting
 def model_performance(model, X_test, y_test, target_names):
-    predictions = model.predict(X_test)
+    """predictions = model.predict(X_test)
     st.subheader("Model Performance")
     st.write(f"Accuracy: {accuracy_score(y_test, predictions):.2f}")
     st.write("Classification Report:")
-    st.text(classification_report(y_test, predictions, target_names=target_names))
+    st.text(classification_report(y_test, predictions, target_names=target_names))"""
+    # Use the performance_report method from the Model class in model.py
+    current_data = pd.concat([X_test, y_test.rename('target')], axis=1)
+    performance_report = model.performance_report(None, current_data)
+    return performance_report
