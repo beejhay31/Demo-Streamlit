@@ -15,7 +15,7 @@ def main_app():
     monitoring = Monitoring(view, model)
 
     # Add option to select between classification or monitoring
-    option = st.sidebar.selectbox('Select Application', ('Exploratory Data Analysis (EDA)', 'Classification', 'Monitoring'))
+    option = st.sidebar.selectbox('Select Application', ('Exploratory Data Analysis (EDA)', 'Classification', 'Monitoring', 'Monitoring History'))
 
     if option == 'Exploratory Data Analysis (EDA)':
         st.write("EDA Interface")
@@ -55,6 +55,10 @@ def main_app():
         # Display model performance in the monitoring interface
         st.write("Monitoring Interface")
         monitoring.run_monitoring()
+
+    elif option == 'Monitoring History':
+        st.write("Monitoring History Interface")
+        monitoring.show_history()
         
 
 if __name__ == "__main__":
