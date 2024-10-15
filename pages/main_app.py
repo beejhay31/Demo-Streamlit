@@ -48,13 +48,6 @@ def main_app():
             prediction = model.predict(input_data)[0]
             predicted_class = target_names[prediction]
             st.write(f"The predicted class is: **{predicted_class}**")
-
-            st.write("Model Performance Report")
-            """df, y, target_names = load_iris_data()
-            df['species'] = y.map({i: target_names[i] for i in range(len(target_names))})
-    
-            X_train, X_test, y_train, y_test = train_test_split(df.drop(columns=['species']), y, test_size=0.2, random_state=42)
-            model = train_model(X_train, y_train)"""
     
             model_performance(model, X_test, y_test, target_names)
 
