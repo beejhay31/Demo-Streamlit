@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 import seaborn as sns
 import matplotlib.pyplot as plt
-from model import Model
+from model.py import Model
 
 # Load Iris dataset
 @st.cache_resource
