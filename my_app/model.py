@@ -38,7 +38,7 @@ class Model:
         predictions = self.model.predict(X_test)
 
         accuracy = accuracy_score(y_test, predictions)
-        report = classification_report(y_test, predictions, output_dict=True)
+        report = classification_report(y_test, predictions)
         #report = classification_report(y_test, predictions, target_names=target_names)
         """performance_report = {
             'accuracy': accuracy,
