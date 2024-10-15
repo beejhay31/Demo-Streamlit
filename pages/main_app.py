@@ -60,10 +60,6 @@ def main_app():
 
         model_performance(model, X_test, y_test, target_names)
         
-        """df, y, target_names = load_iris_data()
-        X_train, X_test, y_train, y_test = train_test_split(df, y, test_size=0.2, random_state=42)
-        model_performance(model, X_test, y_test, target_names)"""
-        
         st.write("Monitoring Interface")
         monitoring.run_monitoring()
         
