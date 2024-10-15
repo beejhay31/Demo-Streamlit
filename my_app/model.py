@@ -26,6 +26,10 @@ class Model:
         # Model training complete
         st.write("Model training complete.")
 
+    def predict(self, X):
+        # Expose the predict method of the LogisticRegression model
+        return self.model.predict(X)
+
     def performance_report(self, reference_data, current_data):
         st.write("Generating model performance report...")
         
