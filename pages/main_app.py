@@ -50,14 +50,14 @@ def main_app():
             st.write(f"The predicted class is: **{predicted_class}**")
 
     elif option == 'Monitoring':
+        st.write("Monitoring Interface")
+        monitoring.run_monitoring()
+        
         # Display model performance in the monitoring interface
         st.write("Model Performance Report")
         df, y, target_names = load_iris_data()
         X_train, X_test, y_train, y_test = train_test_split(df, y, test_size=0.2, random_state=42)
         model_performance(model, X_test, y_test, target_names)
-        
-        st.write("Monitoring Interface")
-        monitoring.run_monitoring()
 
 
 
