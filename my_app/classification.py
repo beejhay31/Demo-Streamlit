@@ -25,7 +25,7 @@ def train_model(X, y):
     #model.fit(X, y)
     #return model
     model = Model()
-    reference_data = pd.concat([X y.rename('target')], axis=1)
+    reference_data = pd.concat([X, y.rename('target')], axis=1)
     model.train_model(reference_data, None)
     return model
 
