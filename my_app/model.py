@@ -38,15 +38,18 @@ class Model:
         predictions = self.model.predict(X_test)
 
         accuracy = accuracy_score(y_test, predictions)
-        report = classification_report(y_test, predictions, output_dict=True)
-
-        performance_report = {
+        #report = classification_report(y_test, predictions, output_dict=True)
+        report = classification_report(y_test, predictions, target_names=target_names)
+        """performance_report = {
             'accuracy': accuracy,
             'classification_report': report
-        }
+        }""" 
 
         st.write(f"Accuracy: {accuracy:.2f}")
-        return performance_report
+        st.write("Classification Report:")
+        st.text(report)
+        #return performance_report
+
 
     def target_report(self, reference_data, current_data):
         st.write("Generating Target Drift Report...")
