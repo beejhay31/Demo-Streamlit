@@ -15,7 +15,7 @@ def main_app():
     monitoring = Monitoring(view, model)
 
     # Add option to select between classification or monitoring
-    option = st.sidebar.selectbox('Select Application', ('Exploratory Data Analysis (EDA)', 'Classification', 'Monitoring', 'Monitoring History'))
+    option = st.sidebar.selectbox('Select Application', ('Exploratory Data Analysis (EDA)', 'Prediction', 'Monitoring', 'Monitoring History'))
 
     if option == 'Exploratory Data Analysis (EDA)':
         st.write("EDA Interface")
@@ -24,8 +24,8 @@ def main_app():
 
         perform_eda(df)
 
-    elif option == 'Classification':
-        st.write("Classification Interface")
+    elif option == 'Prediction':
+        st.write("Prediction Interface")
         df, y, target_names = load_iris_data()
         df['species'] = y.map({i: target_names[i] for i in range(len(target_names))})
 
@@ -49,7 +49,6 @@ def main_app():
             predicted_class = target_names[prediction]
             st.write(f"The predicted class is: **{predicted_class}**")
     
-            model_performance(model, X_test, y_test, target_names)
 
     elif option == 'Monitoring':
         # Display model performance in the monitoring interface
