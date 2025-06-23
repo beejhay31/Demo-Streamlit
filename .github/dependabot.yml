@@ -7,12 +7,10 @@ updates:
     commit-message:
       prefix: "deps"
     groups:
-      security-updates:
+      root-security:
         applies-to: "security-updates"
-        name: "root-security"
-      version-updates:
+      root-updates:
         applies-to: "version-updates"
-        name: "root-updates"
 
   - package-ecosystem: "pip"
     directory: "/my_app"
@@ -21,12 +19,10 @@ updates:
     commit-message:
       prefix: "deps"
     groups:
-      security-updates:
+      api-security:
         applies-to: "security-updates"
-        name: "api-security"
-      version-updates:
+      api-updates:
         applies-to: "version-updates"
-        name: "api-updates"
 
   - package-ecosystem: "pip"
     directory: "/pages"
@@ -35,14 +31,17 @@ updates:
     commit-message:
       prefix: "deps"
     groups:
-      security-updates:
+      auth-security:
         applies-to: "security-updates"
-        name: "auth-security"
-      version-updates:
+      auth-updates:
         applies-to: "version-updates"
-        name: "auth-updates"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
+    groups:
+      gh-actions-security:
+        applies-to: "security-updates"
+      gh-actions-updates:
+        applies-to: "version-updates"
