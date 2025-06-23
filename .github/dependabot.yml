@@ -6,6 +6,7 @@ updates:
       interval: "daily"
     commit-message:
       prefix: "deps"
+    open-pull-requests-limit: 5
     groups:
       root-security:
         applies-to: "security-updates"
@@ -18,10 +19,11 @@ updates:
       interval: "daily"
     commit-message:
       prefix: "deps"
+    open-pull-requests-limit: 5
     groups:
-      api-security:
+      myapp-security:
         applies-to: "security-updates"
-      api-updates:
+      myapp-updates:
         applies-to: "version-updates"
 
   - package-ecosystem: "pip"
@@ -30,18 +32,20 @@ updates:
       interval: "daily"
     commit-message:
       prefix: "deps"
+    open-pull-requests-limit: 5
     groups:
-      auth-security:
+      pages-security:
         applies-to: "security-updates"
-      auth-updates:
+      pages-updates:
         applies-to: "version-updates"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
+    open-pull-requests-limit: 5
     groups:
-      gh-actions-security:
+      gha-security:
         applies-to: "security-updates"
-      gh-actions-updates:
+      gha-updates:
         applies-to: "version-updates"
