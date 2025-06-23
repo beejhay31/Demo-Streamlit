@@ -1,17 +1,12 @@
 version: 2
 updates:
   - package-ecosystem: "pip"
-    directory: "/"  # Top-level requirements.txt
+    directory: "/"
     schedule:
       interval: "daily"
     commit-message:
       prefix: "deps"
     open-pull-requests-limit: 5
-    groups:
-      root-security:
-        applies-to: "security-updates"
-      root-updates:
-        applies-to: "version-updates"
 
   - package-ecosystem: "pip"
     directory: "/my_app"
@@ -20,11 +15,6 @@ updates:
     commit-message:
       prefix: "deps"
     open-pull-requests-limit: 5
-    groups:
-      myapp-security:
-        applies-to: "security-updates"
-      myapp-updates:
-        applies-to: "version-updates"
 
   - package-ecosystem: "pip"
     directory: "/pages"
@@ -33,19 +23,9 @@ updates:
     commit-message:
       prefix: "deps"
     open-pull-requests-limit: 5
-    groups:
-      pages-security:
-        applies-to: "security-updates"
-      pages-updates:
-        applies-to: "version-updates"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 5
-    groups:
-      gha-security:
-        applies-to: "security-updates"
-      gha-updates:
-        applies-to: "version-updates"
