@@ -2,7 +2,7 @@ streamlit
 scikit-learn
 pandas
 matplotlib
-evidently=0.4.40
+evidently==0.4.40
 numpy
 pyyaml
 seaborn
